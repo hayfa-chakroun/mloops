@@ -1,0 +1,36 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: make install
+
+    - name: Lint code
+      run: make lint
+
+    - name: Prepare data
+      run: make prepare
+
+    - name: Train model
+      run: make train
+
+    - name: Evaluate model
+      run: make evaluate
