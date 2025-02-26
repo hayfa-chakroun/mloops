@@ -1,0 +1,24 @@
+from fastapi import FastAPI, HTTPException
+import numpy as np
+import joblib
+from pydantic import BaseModel
+
+# Charger le modèle
+m
+model = joblib.load("model.pkl")
+# Initialiser l'application FastAPI
+app = FastAPI()
+
+# Définir un modèle de données pour les entrées
+class InputData(BaseModel):
+    features: list
+
+@app.post("/predict")
+def predict(data: InputData):
+    try:
+        # Transformer les entrées en numpy array
+        input_array = np.array(data.features).reshape(1, -1)
+        prediction = model.predict(input_array)
+        return {"prediction": int(prediction[0])}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))

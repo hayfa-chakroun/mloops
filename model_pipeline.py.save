@@ -1,0 +1,82 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+import joblib
+def prepare_data(data_path='Churn_Modelling.csv'):
+    # Importation d'un encodeur pour transformer les données catégoriques en numériques
+    encoder = LabelEncoder()
+
+    # Chargement des données depuis le fichier CSV
+    data = pd.read_csv(data_path)
+
+    # Suppression des colonnes inutiles pour la prédiction (le nom et le pays)
+    data = data.drop(['Surname', 'Geography'], axis=1)
+
+    # Encodage de la colonne "Gender" (par exemple, "Male" -> 1 et "Female" -> 0)
+    data['Gender'] = encoder.fit_transform(data['Gender'])
+
+    # Suppression des lignes avec des données manquantes
+    data = data.dropna()
+
+    # Séparation des données en caractéristiques (X) et cible (y)
+    X = data.drop(['Exited', 'RowNumber', 'CustomerId'], axis=1)  # X : Caractéristiques
+    y = data['Exited']  # y : Cible (le label à prédire)
+
+    # Division des données en jeu d'entraînement (80 %) et jeu de test (20 %)
+    x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+
+    # Normalisation des données pour mettre les valeurs sur une même échelle
+    scaler = StandardScaler()
+    x_train_scaled = scaler.fit_transform(x_train)
+    x_test_scaled = scaler.transform(x_test)
+
+    # Sauvegarde du scaler pour une utilisation ultérieure
+    joblib.dump(scaler, 'scaler.joblib')
+
+    # Retourne les données préparées pour le modèle
+    return x_train_scaled, x_test_scaled, y_train, y_test
+
+def train_model(x_train, y_train):
+    # Crée une instance du classificateur RandomForest avec 100 arbres (n_estimators) et une valeur aléatoire fixe pour assurer la reproductibilité (random_state=1)
+    model = RandomForestClassifier(n_estimators=100, random_state=1)
+
+    # Entraîne le modèle sur les données d'entraînement (x_train) et les étiquettes (y_train)
+    model.fit(x_train, y_train)
+
+    # Retourne le modèle entraîné
+    return model
+
+def evaluate_model(model, x_test, y_test):
+    # Utilise le modèle entraîné pour prédire les étiquettes des données de test (x_test)
+    y_pred = model.predict(x_test)
+
+    # Calcule la précision du modèle en comparant les prédictions (y_pred) avec les vraies étiquettes (y_test)
+    accuracy = accuracy_score(y_test, y_pred)
+
+    # Affiche la précision (accuracy) du modèle
+    print(f"Accuracy: {accuracy}")
+
+    # Retourne la précision calculée
+    return accuracy
+
+def save_model(model, model_path='model.joblib'):
+    # Sauvegarde le modèle entraîné dans un fichier spécifié par model_path (par défaut 'model.joblib')
+    joblib.dump(model, model_path)
+
+    # Affiche un message confirmant que le modèle a été sauvegardé avec succès à l'emplacement spécifié
+    print(f"Model saved to {model_path}")
+
+def load_model(model_path='model.joblib'):
+    # Charge le modèle à partir du fichier spécifié par model_path (par défaut 'model.joblib')
+    model = joblib.load(model_path)
+
+    # Affiche un message confirmant que le modèle a été chargé avec succès depuis l'emplacement spécifié
+    print(f"Model loaded from {model_path}")
+
+    # Retourne le modèle chargé
+    return model
+
+def l

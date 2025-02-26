@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/8328653c7edf456b9aebf071967180fb/artifacts
+end_time: 1739639192256
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8328653c7edf456b9aebf071967180fb
+run_name: dashing-crow-584
+run_uuid: 8328653c7edf456b9aebf071967180fb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739639189676
+status: 4
+tags: []
+user_id: hayfa

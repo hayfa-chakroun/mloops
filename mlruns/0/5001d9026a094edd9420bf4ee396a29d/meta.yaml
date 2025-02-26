@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/5001d9026a094edd9420bf4ee396a29d/artifacts
+end_time: 1740097341627
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5001d9026a094edd9420bf4ee396a29d
+run_name: dazzling-ape-687
+run_uuid: 5001d9026a094edd9420bf4ee396a29d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740097335477
+status: 3
+tags: []
+user_id: hayfa

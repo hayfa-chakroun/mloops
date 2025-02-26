@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/ac0d3abbf090456789645520da9a738d/artifacts
+end_time: 1740090719021
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ac0d3abbf090456789645520da9a738d
+run_name: rebellious-fish-329
+run_uuid: ac0d3abbf090456789645520da9a738d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740090717993
+status: 4
+tags: []
+user_id: hayfa
