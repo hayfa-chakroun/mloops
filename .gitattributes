@@ -1,1 +1,2 @@
 *.so filter=lfs diff=lfs merge=lfs -text
+venv/lib/python3.8/site-packages/pyarrow/libarrow.so.1700 filter=lfs diff=lfs merge=lfs -text
