@@ -30,7 +30,18 @@ deploy: train evaluate
 	cp -rv src $(DEPLOY_DIR)/
 	cp -v requirements.txt $(DEPLOY_DIR)/
 	@echo "✅ Déploiement terminé dans $(DEPLOY_DIR)"
-
+# Cible pour exécuter la préparation, l'entraînement et l'évaluation en une seule commande
+test:
+	$(PYTHON) main.py --prepare --train --evaluate --train_path $(TRAIN_PATH) --test_path $(TEST_PATH) --model_path $(MODEL_PATH)
+			
+# Démarrer le serveur Jupyter Notebook
+notebook:
+	@echo "Démarrage de Jupyter Notebook..."
+	@if [ -z "$$VIRTUAL_ENV" ]; then \
+	bash -c "source $(ENV_NAME)/bin/activate && jupyter notebook"; \
+	else \
+	jupyter notebook; \
+	fi
 # Lancer l'API
 api:
 	$(PYTHON) -m uvicorn app:app --reload --host 0.0.0.0 --port 8001
