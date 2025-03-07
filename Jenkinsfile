@@ -1,10 +1,9 @@
 pipeline {
     agent any
-
     stages {
         stage('Cloner le projet') {
             steps {
-                git 'https://github.com/hayfa211/mlops_pipeline.git'
+                git 'https://github.com/hayfa-chakroun/mloops.git'
             }
         }
         stage('Installer les dépendances') {
@@ -12,7 +11,7 @@ pipeline {
                 sh 'pip install -r requirements.txt'
             }
         }
-        stage('Lancer l’API FastAPI') {
+        stage('Lancer FastAPI') {
             steps {
                 sh 'uvicorn app:app --host 0.0.0.0 --port 8001 --reload &'
             }
