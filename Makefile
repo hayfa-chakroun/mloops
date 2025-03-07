@@ -20,9 +20,9 @@ check_venv:
 lint: check_venv
 	$(ACTIVATE) && pylint $(MAIN_SCRIPT) model_pipeline.py
 
-# Exécuter les tests avec pytest
-test: check_venv
-	$(ACTIVATE) && PYTHONPATH=. pytest tests/
+# Cible pour exécuter la préparation, l'entraînement et l'évaluation en une seule commande
+test:
+	$(PYTHON) main.py --prepare --train --evaluate --train_path $(TRAIN_PATH) --test_path $(TEST_PATH) --model_path $(MODEL_PATH)
 
 # Sécurité - Analyser le code avec bandit
 security: check_venv
