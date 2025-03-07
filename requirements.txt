@@ -9,3 +9,8 @@ uvicorn
 joblib
 imbalanced-learn
 xgboost
+pylint
+pytest
+bandit
+black
+
