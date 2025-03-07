@@ -16,7 +16,6 @@ check_venv:
 		echo "❌ L'environnement virtuel n'est pas activé. Active-le et réessaie."; \
 		exit 1; \
 	fi
-
 # Vérifier l'environnement virtuel et exécuter pylint sur ton code
 lint: check_venv
 	$(ACTIVATE) && pylint $(MAIN_SCRIPT) model_pipeline.py
@@ -32,7 +31,6 @@ security: check_venv
 # Formater le code avec black
 format: check_venv
 	$(ACTIVATE) && black $(MAIN_SCRIPT)
-
 # Cible par défaut
 all: install prepare train evaluate deploy
 
