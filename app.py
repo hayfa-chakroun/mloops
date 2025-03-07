@@ -5,8 +5,7 @@ from pydantic import BaseModel
 from elasticsearch import Elasticsearch
 import joblib
 import numpy as np
-from model_pipeline import prepare_data, train_model, save_model, load_model  # Assurez-vous que les imports sont utilisés.
-
+from model_pipeline import prepare_data, train_model, save_model, load_model
 # Connexion à Elasticsearch
 es = Elasticsearch(["http://localhost:9200"])
 
